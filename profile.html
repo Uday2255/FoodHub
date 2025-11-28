@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FoodHub - Home</title>
+  <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">FoodHub</div>
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="cart.html">Cart</a>
+
+      <div class="dropdown">
+        <button class="dropbtn" id="profileBtn">Profile</button>
+        <div class="dropdown-content" id="dropdownMenu">
+          <div class="menu-item disabled">Edit Profile</div>
+          <div class="menu-item disabled">My Orders</div>
+          <div class="menu-item disabled">Settings</div>
+          <div class="menu-item logout" id="logoutBtn">Logout</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Title -->
+  <h1 class="page-title">Choose Your Favorite Food</h1>
+
+  <!-- Categories Grid -->
+  <div class="categories">
+    <div class="category" onclick="openCategory('items/biryani.html')">
+      <img src="images/biryani1.jpg" alt="Biryani" width="100px" height="100px"><p>Biryani</p>
+    </div>
+    <div class="category" onclick="openCategory('items/tiffins.html')">
+      <img src="images/tiffin1.jpg" alt="Tiffins"><p>Tiffins</p>
+    </div>
+    <div class="category" onclick="openCategory('items/meals.html')">
+      <img src="images/meal1.jpg" alt="Meals"><p>Meals</p>
+    </div>
+    <div class="category" onclick="openCategory('items/snacks.html')">
+      <img src="images/snack1.jpg" alt="Snacks"><p>Snacks</p>
+    </div>
+    <div class="category" onclick="openCategory('items/pizza.html')">
+      <img src="images/pizza1.jpg" alt="Pizza"><p>Pizza</p>
+    </div>
+    <div class="category" onclick="openCategory('items/chicken.html')">
+      <img src="images/chicken1.jpg" alt="Chicken"><p>Chicken</p>
+    </div>
+    <div class="category" onclick="openCategory('items/icecream.html')">
+      <img src="images/icecream1.jpg" alt="Ice Cream"><p>Ice Cream</p>
+    </div>
+    <div class="category" onclick="openCategory('items/juice.html')">
+      <img src="images/juice1.jpg" alt="Juices"><p>Juices</p>
+    </div>
+    <div class="category" onclick="openCategory('items/cake.html')">
+      <img src="images/cake1.jpg" alt="Cakes"><p>Cakes</p>
+    </div>
+    <div class="category" onclick="openCategory('items/drinks.html')">
+      <img src="images/drink1.jpg" alt="Drinks"><p>Drinks</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 FoodHub • Made with love for food lovers</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Protect page - redirect to login if not logged in
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+      window.location.replace("index.html");
+    }
+
+    // Profile dropdown - open/close on click
+    const profileBtn = document.getElementById("profileBtn");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+
+    profileBtn.addEventListener("click", function(e) {
+      e.stopPropagation();
+      dropdownMenu.classList.toggle("show");
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", function() {
+      dropdownMenu.classList.remove("show");
+    });
+
+    // Only Logout works
+    document.getElementById("logoutBtn").addEventListener("click", function() {
+      if (confirm("Are you sure you want to logout?")) {
+        localStorage.removeItem("isLoggedIn");
+        alert("Logged out successfully!");
+        window.location.replace("index.html");
+      }
+    });
+
+    // Open category pages
+    function openCategory(page) {
+      window.location.href = page;
+    }
+  </script>
+
+</body>
+</html>

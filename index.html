@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FoodHub - Login / Signup</title>
+<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<h1 class="scroll-text">🍔 Welcome to FoodHub 🍕</h1>
+
+<div class="container" id="login-box">
+    <h2>Login</h2>
+    <input type="email" id="login-email" placeholder="Enter Email" required>
+    <input type="password" id="login-password" placeholder="Enter Password" required>
+    <button onclick="login()">Login</button>
+    <p>Don't have an account? <span class="link" onclick="showSignup()">Signup</span></p>
+</div>
+
+<div class="container hidden" id="signup-box">
+    <h2>Signup</h2>
+    <input type="text" id="signup-username" placeholder="Enter Username" required>
+    <input type="email" id="signup-email" placeholder="Enter Email" required>
+    <input type="password" id="signup-password" placeholder="Create Password" required>
+    <button onclick="signup()">Signup</button>
+    <p>Already have an account? <span class="link" onclick="showLogin()">Login</span></p>
+</div>
+<script>
+function showSignup() {
+    document.getElementById("login-box").classList.add("hidden");
+    document.getElementById("signup-box").classList.remove("hidden");
+}
+
+function showLogin() {
+    document.getElementById("signup-box").classList.add("hidden");
+    document.getElementById("login-box").classList.remove("hidden");
+}
+
+function signup() {
+    const username = document.getElementById("signup-username").value;
+    const email = document.getElementById("signup-email").value;
+    const password = document.getElementById("signup-password").value;
+
+    if (!username || !email || !password) {
+        alert("Please fill all fields!");
+        return;
+    }
+
+    // Save user profile in localStorage
+    localStorage.setItem("profile", JSON.stringify({ username, email, password }));
+    alert("Signup Successful!");
+    showLogin();
+}
+
+function login() {
+    const email = document.getElementById("login-email").value;
+    const password = document.getElementById("login-password").value;
+
+    const storedUser = JSON.parse(localStorage.getItem("profile"));
+
+    if (storedUser && storedUser.email === email && storedUser.password === password) {
+        alert("Login Successful! 🎉");
+
+        // Set login flag
+        localStorage.setItem("isLoggedIn", "true");
+
+        // Redirect to home page and replace history
+        window.location.replace("home.html");
+    } else {
+        alert("Invalid Email or Password ❌");
+    }
+}
+</script>
+
+
+
+</body>
+</html>
